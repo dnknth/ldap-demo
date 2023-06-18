@@ -55,8 +55,9 @@ memberof-memberof-ad memberOf
 memberof-refint true
 EOF
 fi
+
 for schema in $SCHEMAS; do
-    echo "include /etc/openldap/schema/${schema}.schema" >> /etc/ldap/slapd.conf
+    fgrep ${schema}.schema /etc/ldap/slapd.conf || echo "include /etc/openldap/schema/${schema}.schema" >> /etc/ldap/slapd.conf
 done
 if test -e /ssl/${DOMAIN}.key \
         -a -e /ssl/${DOMAIN}.pem; then
